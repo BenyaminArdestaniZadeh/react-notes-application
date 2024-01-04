@@ -3,9 +3,16 @@
   padding: 0;
   box-sizing: border-box;
 }
+#root {
+  width: 100%;
+}
 
 body {
+  max-width: 1200px;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 10px;
+  color: whitesmoke;
+  background-color: #777777 !important;
 }
