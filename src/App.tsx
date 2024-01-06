@@ -1,10 +1,12 @@
-import { Flex, Grid, Text } from "@radix-ui/themes";
+//firs use react hook form to save the user's data
+//second save the react hook form output as object to use that for pass the atom
+//third use atom and show user's input in note
+import { Flex, Grid } from "@radix-ui/themes";
 import Header from "./components/header/Header";
-// import Note from "./components/note/Note";
-import { CreateNewNoteButton } from "./components/note.styled";
 import { useAtom } from "jotai";
 import { noteAtom } from "./store/note";
-import CreateNote from "./components/note/CreateNote";
+import NoteItem from "./components/note item/NoteItem";
+import NewNote from "./components/new note/NewNote";
 
 function App() {
   const [noteText, setNoteText] = useAtom(noteAtom);
@@ -19,16 +21,14 @@ function App() {
       <Header />
       <Grid columns={"3"} gap={"3"} flow={"row"}>
         {noteText.map((item) => (
-          <CreateNote
+          <NoteItem
             title={item.title}
             bodyText={item.bodyText}
             date={item.date}
           />
         ))}
       </Grid>
-      <CreateNewNoteButton size={"4"} color="yellow">
-        <Text size={"6"}>+</Text>
-      </CreateNewNoteButton>
+      <NewNote />
     </Flex>
   );
 }

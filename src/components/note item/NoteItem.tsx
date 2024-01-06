@@ -1,7 +1,8 @@
 import { Flex, Heading, Text } from "@radix-ui/themes";
 import { NoteProps } from "../../types/note.types";
+import { LimitText } from "../note.styled";
 
-const CreateNote = (props: NoteProps) => {
+const NoteItem = (props: NoteProps) => {
   const { title, bodyText, date } = props;
 
   return (
@@ -18,9 +19,9 @@ const CreateNote = (props: NoteProps) => {
       <Heading size={"7"} style={{ color: "whitesmoke" }}>
         {title}
       </Heading>
-      <Text size={"4"} style={{ color: "#d3d3d3" }}>
+      <LimitText size={"4"} style={{ color: "#d3d3d3" }} lineNumber={3}>
         {bodyText}
-      </Text>
+      </LimitText>
       <Flex justify={"end"}>
         <Text size={"2"} style={{ color: "#141414" }}>
           {date}
@@ -30,4 +31,4 @@ const CreateNote = (props: NoteProps) => {
   );
 };
 
-export default CreateNote;
+export default NoteItem;

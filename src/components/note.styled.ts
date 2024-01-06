@@ -1,10 +1,11 @@
-import { Button, TextField } from "@radix-ui/themes";
+import { Button, Text, TextField } from "@radix-ui/themes";
 import styled from "styled-components";
 
 export const SearchWrapper = styled(TextField.Root)`
   padding-inline: 1.2rem;
   padding-block: 0.6rem;
   width: 25rem;
+  box-shadow: 1px 2px 6px 1px #5a5a5a;
   @media (min-width: 52rem) {
     width: 30rem;
   }
@@ -22,4 +23,12 @@ export const CreateNewNoteButton = styled(Button)`
   right: 5%;
   bottom: 5%;
   cursor: pointer;
+`;
+
+export const LimitText = styled(Text)<{ lineNumber?: number }>`
+  display: -webkit-box;
+  -webkit-line-clamp: ${(props) => props.lineNumber};
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  overflow: hidden;
 `;
