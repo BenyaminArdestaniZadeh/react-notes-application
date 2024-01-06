@@ -18,10 +18,10 @@ const Header = () => {
       </SearchWrapper>
       {/* search */}
       <Flex gap={"5"} align={"center"} py={"3"}>
-        <Button size={"3"} color="yellow">
+        <Button size={"3"} color="yellow" style={{ cursor: "pointer" }}>
           <Text>All</Text>
         </Button>
-        <Button size={"3"} color="yellow">
+        <Button size={"3"} color="yellow" style={{ cursor: "pointer" }}>
           <ReactSVG src="./svg/FolderIcon.svg" />
         </Button>
       </Flex>

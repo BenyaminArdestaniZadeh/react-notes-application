@@ -1,6 +1,9 @@
 import { Flex, Heading, Text } from "@radix-ui/themes";
+import { NoteProps } from "../../types/note.types";
 
-const Note = () => {
+const CreateNote = (props: NoteProps) => {
+  const { title, bodyText, date } = props;
+
   return (
     <Flex
       direction={"column"}
@@ -13,14 +16,18 @@ const Note = () => {
       }}
     >
       <Heading size={"7"} style={{ color: "whitesmoke" }}>
-        Golabi
+        {title}
       </Heading>
-      <Text size={"4"}>akjjjjjsdae</Text>
+      <Text size={"4"} style={{ color: "#d3d3d3" }}>
+        {bodyText}
+      </Text>
       <Flex justify={"end"}>
-        <Text size={"2"}>yeeeeeeeees</Text>
+        <Text size={"2"} style={{ color: "#141414" }}>
+          {date}
+        </Text>
       </Flex>
     </Flex>
   );
 };
 
-export default Note;
+export default CreateNote;
