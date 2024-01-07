@@ -1,44 +1,65 @@
 import { Button, Dialog, Flex, Text, TextArea } from "@radix-ui/themes";
 import { CreateNewNoteButton } from "../note.styled";
 import styled from "styled-components";
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { NoteProps } from "../../types/note.types";
 import { useAtom } from "jotai";
 import { noteAtom } from "../../store/note";
+import { useState } from "react";
 
 const NewNote = () => {
-  const [noteText, setNoteText] = useAtom(noteAtom);
-
+  const [noteItem, setNoteItem] = useAtom(noteAtom);
+  const [open, setOpen] = useState<boolean>(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<NoteProps>();
 
-  const onSubmit = () => {
-    const AddItemToNote: NoteProps = {};
-    setNoteText([...noteText, AddItemToNote]);
+  const currentDate = new Date().toString().slice(4, 21);
+
+  const onSubmit: SubmitHandler<NoteProps> = (item: NoteProps) => {
+    if (item.bodyText.trim() !== "" && item.title?.trim() !== "") {
+      const AddItemToNote = {
+        title: item.title,
+        bodyText: item.bodyText,
+        date: currentDate,
+      };
+      setNoteItem([...noteItem, AddItemToNote]);
+    }
+    setOpen(!open);
+    console.log("form data:", item);
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Dialog.Root>
-        <Dialog.Trigger>
-          <CreateNewNoteButton size={"4"} color="yellow">
-            <Text size={"6"}>+</Text>
-          </CreateNewNoteButton>
-        </Dialog.Trigger>
-        <Dialog.Content style={{ backgroundColor: "#282b30" }}>
+    <Dialog.Root open={open} onOpenChange={setOpen}>
+      <Dialog.Trigger>
+        <CreateNewNoteButton size={"4"} color="yellow">
+          <Text size={"6"}>+</Text>
+        </CreateNewNoteButton>
+      </Dialog.Trigger>
+      <Dialog.Content style={{ backgroundColor: "#282b30" }}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <Flex direction={"column"} gap={"3"}>
             <Dialog.Title style={{ color: "whitesmoke" }}>
-              <input
-                {...register("title", {
-                  required: true,
-                })}
-                defaultValue={""}
-                placeholder="Title"
-                className="input-style"
-              />
+              <Flex direction={"column"} gap={"2"} px={"4"} py={"2"}>
+                <input
+                  {...register("title", {
+                    required: true,
+                  })}
+                  defaultValue={""}
+                  placeholder="Title"
+                  className="input-style"
+                />
+                <Text
+                  as="label"
+                  size={"3"}
+                  weight={"light"}
+                  style={{ color: "#9f9ffc" }}
+                >
+                  {currentDate}
+                </Text>
+              </Flex>
             </Dialog.Title>
             <TextAreaWrapper
               {...register("bodyText", {
@@ -58,19 +79,29 @@ const NewNote = () => {
           </Flex>
           <Flex width={"auto"} gap={"3"} mt={"4"} justify={"end"}>
             <Dialog.Close>
-              <Button size={"3"} color="gray" style={{ cursor: "pointer" }}>
+              <Button
+                type="button"
+                size={"3"}
+                color="gray"
+                style={{ cursor: "pointer" }}
+              >
                 <Text>Cancle</Text>
               </Button>
             </Dialog.Close>
-            <Dialog.Close>
-              <Button size={"3"} color="yellow" style={{ cursor: "pointer" }}>
-                <Text>Save</Text>
-              </Button>
-            </Dialog.Close>
+            {/* <Dialog.Close> */}
+            <Button
+              type="submit"
+              size={"3"}
+              color="yellow"
+              style={{ cursor: "pointer" }}
+            >
+              <Text>Save</Text>
+            </Button>
+            {/* </Dialog.Close> */}
           </Flex>
-        </Dialog.Content>
-      </Dialog.Root>
-    </form>
+        </form>
+      </Dialog.Content>
+    </Dialog.Root>
   );
 };
 
@@ -81,9 +112,18 @@ const TextAreaWrapper = styled(TextArea)`
     outline: none;
     color: #c5c5c5;
     background-color: #282b30;
-    font-size: 14px;
+    font-size: 17px;
   }
   ::placeholder {
     color: #ffffff;
   }
 `;
+
+// const getCurrentDate = () => {
+//     let currentDate = new Date().toString().slice(0, 21);
+//     let day = currentDate.slice(0, 3);
+//     let date = currentDate.slice(4, 15);
+//     let time = currentDate.slice(16, 22);
+//     const reFormatCurrentDate = `${day}-${date}-${time}`;
+//     return reFormatCurrentDate;
+//   };

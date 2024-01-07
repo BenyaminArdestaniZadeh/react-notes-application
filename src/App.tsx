@@ -9,7 +9,8 @@ import NoteItem from "./components/note item/NoteItem";
 import NewNote from "./components/new note/NewNote";
 
 function App() {
-  const [noteText, setNoteText] = useAtom(noteAtom);
+  const [noteItem] = useAtom(noteAtom);
+
   return (
     <Flex
       width={"100%"}
@@ -20,7 +21,7 @@ function App() {
     >
       <Header />
       <Grid columns={"3"} gap={"3"} flow={"row"}>
-        {noteText.map((item) => (
+        {noteItem.map((item) => (
           <NoteItem
             title={item.title}
             bodyText={item.bodyText}

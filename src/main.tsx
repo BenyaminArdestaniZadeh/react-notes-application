@@ -9,10 +9,10 @@ import { Provider } from "jotai";
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     {/* use jotai provider to handle global states */}
-    <Theme>
-      <Provider>
+    <Provider>
+      <Theme>
         <App />
-      </Provider>
-    </Theme>
+      </Theme>
+    </Provider>
   </React.StrictMode>
 );
