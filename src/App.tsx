@@ -21,7 +21,7 @@ function App() {
     >
       <Header />
       <Grid columns={"3"} gap={"3"} flow={"row"}>
-        {noteItem.map((item) => (
+        {noteItem?.map((item) => (
           <NoteItem
             title={item.title}
             bodyText={item.bodyText}

@@ -4,7 +4,6 @@ import { NoteProps } from "../../types/note.types";
 
 const NoteItem = (props: NoteProps) => {
   const { title, bodyText, date } = props;
-  // const currentDate = new Date().toString().slice(4, 21);
 
   return (
     <Flex

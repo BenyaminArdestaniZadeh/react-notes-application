@@ -18,7 +18,8 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.49.2",
     "react-svg": "^16.1.32",
-    "styled-components": "^6.1.6"
+    "styled-components": "^6.1.6",
+    "use-debounce": "^10.0.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",

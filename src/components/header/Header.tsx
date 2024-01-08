@@ -1,10 +1,12 @@
 import { Button, Flex, Text } from "@radix-ui/themes";
 import { ReactSVG } from "react-svg";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useDebounce } from "use-debounce";
 
 const Header = () => {
   const [searchValue, setSearchValue] = useState<string>("");
+  const [] = useDebounce(searchValue, 500);
 
   // useEffect(() => {}, [searchValue]);
 
