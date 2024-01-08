@@ -16,17 +16,13 @@ body {
   background-color: #575757 !important;
 }
 
-.search-input {
-  border: none;
-  outline: none;
+.search-wrapper {
+  width: 25rem;
   margin-top: 2rem;
+  border-radius: 4px;
   padding-inline: 32px;
   padding-block: 16px;
-  border-radius: 4px;
-  font-size: 16px;
-  width: 25rem;
   background-color: #282b30;
-  color: #979797;
   box-shadow: 1px 2px 6px 1px #797979;
   @media (min-width: 52rem) {
     width: 30rem;
@@ -34,6 +30,18 @@ body {
   @media (min-width: 76.8rem) {
     width: 35rem;
   }
+}
+
+.search-input {
+  border: none;
+  outline: none;
+
+  padding-inline: 8px;
+  padding-block: 4px;
+  font-size: 16px;
+  width: 25rem;
+  background-color: transparent;
+  color: #979797;
 }
 
 .input-style {
