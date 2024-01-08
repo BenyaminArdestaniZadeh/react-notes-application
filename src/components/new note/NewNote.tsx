@@ -88,7 +88,6 @@ const NewNote = () => {
                 <Text>Cancle</Text>
               </Button>
             </Dialog.Close>
-            {/* <Dialog.Close> */}
             <Button
               type="submit"
               size={"3"}
@@ -97,7 +96,6 @@ const NewNote = () => {
             >
               <Text>Save</Text>
             </Button>
-            {/* </Dialog.Close> */}
           </Flex>
         </form>
       </Dialog.Content>
