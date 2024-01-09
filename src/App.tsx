@@ -21,8 +21,9 @@ function App() {
     >
       <Header />
       <Grid columns={"3"} gap={"3"} flow={"row"}>
-        {noteItem?.map((item) => (
+        {noteItem?.map((item, index) => (
           <NoteItem
+            key={index}
             title={item.title}
             bodyText={item.bodyText}
             date={item.date}

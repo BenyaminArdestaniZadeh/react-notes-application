@@ -1,5 +1,5 @@
 export type NoteProps = {
-  title?: string;
+  title: string;
   bodyText: string;
-  date?: string;
+  date: string;
 };

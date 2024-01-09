@@ -1,17 +1,31 @@
 import { Button, Flex, Text } from "@radix-ui/themes";
 import { ReactSVG } from "react-svg";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
-import { useState } from "react";
-import { useDebounce } from "use-debounce";
+import { useEffect, useState } from "react";
+import { UseDebounce } from "../use-debounce/UseDebounce";
+import { useAtom } from "jotai";
+import { noteAtom } from "../../store/note";
+import { NoteProps } from "../../types/note.types";
 
 const Header = () => {
   const [searchValue, setSearchValue] = useState<string>("");
-  const [] = useDebounce(searchValue, 500);
+  const debouncedValue = UseDebounce<string>(searchValue, 500);
+  const [noteItem, setNoteItem] = useAtom(noteAtom);
 
-  // useEffect(() => {}, [searchValue]);
+  useEffect(() => {}, [searchValue]);
 
-  const handleSearchInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(event.target.value);
+  // console.log(debouncedValue);
+
+  const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const result = noteItem.filter((item) => {
+      if (e.target.value === "") return noteItem;
+      return (
+        item.title.toLowerCase().includes(e.target.value.toLowerCase()) ||
+        item.bodyText.toLowerCase().includes(e.target.value.toLowerCase())
+      );
+    });
+    console.log(result);
+    setNoteItem(result);
   };
 
   return (
@@ -25,8 +39,7 @@ const Header = () => {
           type="search"
           className="search-input"
           placeholder="Search Notes"
-          onChange={(event) => handleSearchInput(event)}
-          value={searchValue}
+          onChange={(e) => handleSearchInput(e)}
         />
       </Flex>
 
