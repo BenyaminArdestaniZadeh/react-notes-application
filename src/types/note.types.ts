@@ -3,3 +3,8 @@ export type NoteProps = {
   bodyText: string;
   date: string;
 };
+
+export type CategoryItemProps = {
+  title: string;
+  categoryItemNumbers: number;
+};
