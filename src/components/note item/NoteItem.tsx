@@ -2,18 +2,11 @@ import { Button, Flex, Heading, Text } from "@radix-ui/themes";
 import { LimitText } from "../note.styled";
 import { NoteProps } from "../../types/note.types";
 import { Pencil1Icon } from "@radix-ui/react-icons";
-import NewNote from "../new note/NewNote";
-// import { useEffect, useState } from "react";
-// import NewNote from "../new note/NewNote";
+import CustomDialog from "../shared/dialog/CustomDialog";
+import NewNoteContent from "../new-note-content/NewNoteContent";
 
 const NoteItem = (props: NoteProps) => {
   const { title, bodyText, date } = props;
-  // const [editNote, setEditNote] = useState<boolean>(false);
-
-  // useEffect(()=>{
-
-  // },[editNote])
-  const handleEditButton = () => {};
 
   return (
     <Flex
@@ -30,14 +23,15 @@ const NoteItem = (props: NoteProps) => {
         <Heading size={"7"} style={{ color: "whitesmoke" }}>
           {title}
         </Heading>
-        <Button
-          variant="solid"
-          color="yellow"
-          onClick={() => <NewNote />}
-          style={{ cursor: "pointer", paddingBlock: "20px" }}
-        >
-          <Pencil1Icon style={{ width: "25px", height: "25px" }} />
-        </Button>
+        <CustomDialog
+          triger={
+            <Button size={"3"} color="yellow" style={{ cursor: "pointer" }}>
+              <Pencil1Icon style={{ width: "25px", height: "25px" }} />
+            </Button>
+          }
+          content={(dismiss) => <NewNoteContent dismiss={dismiss} />}
+          backgroundColor="#282b30"
+        />
       </Flex>
 
       <LimitText size={"4"} style={{ color: "#d3d3d3" }} lineNumber={3}>
