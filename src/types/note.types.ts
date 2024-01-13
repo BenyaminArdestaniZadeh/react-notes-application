@@ -6,5 +6,5 @@ export type NoteProps = {
 
 export type CategoryItemProps = {
   title: string;
-  categoryItemNumbers: number;
+  categoryItemNumbers?: number;
 };

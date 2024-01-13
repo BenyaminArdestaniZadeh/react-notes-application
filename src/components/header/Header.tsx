@@ -18,6 +18,7 @@ const Header = () => {
         item.bodyText.toLowerCase().includes(e.target.value.toLowerCase())
       );
     });
+
     setNoteItem(result);
   };
 

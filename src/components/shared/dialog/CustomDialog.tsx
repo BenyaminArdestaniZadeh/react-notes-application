@@ -7,12 +7,16 @@ const CustomDialog = ({
   backgroundColor,
   boxShadow,
   maxWidth,
+  height,
+  maxHeight,
 }: {
   triger: ReactNode;
   content: (dismiss: () => void) => ReactNode;
   backgroundColor?: string;
   boxShadow?: string;
   maxWidth?: "50rem" | string;
+  height?: string;
+  maxHeight?: string;
 }) => {
   const [open, setOpen] = useState(false);
   const dismiss = () => setOpen(false);
@@ -24,6 +28,8 @@ const CustomDialog = ({
           backgroundColor: backgroundColor,
           boxShadow: boxShadow,
           maxWidth: maxWidth,
+          height: height,
+          maxHeight: maxHeight,
         }}
       >
         {content(dismiss)}

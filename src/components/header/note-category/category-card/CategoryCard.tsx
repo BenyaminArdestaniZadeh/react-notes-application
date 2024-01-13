@@ -1,7 +1,7 @@
 import { Flex, Text } from "@radix-ui/themes";
 import { CategoryItemProps } from "../../../../types/note.types";
 
-const CategoryItemWrapper = (props: CategoryItemProps) => {
+const CategoryCard = (props: CategoryItemProps) => {
   const { title, categoryItemNumbers } = props;
   return (
     <Flex
@@ -12,10 +12,10 @@ const CategoryItemWrapper = (props: CategoryItemProps) => {
       py={"4"}
       style={{ backgroundColor: "#282b30", borderRadius: "4px" }}
     >
-      <Text style={{ color: "whitesmoke" }}>{title} sdsa</Text>
-      <Text style={{ color: "#a8a8a8" }}>{categoryItemNumbers}asdsa </Text>
+      <Text style={{ color: "whitesmoke" }}>{title}</Text>
+      <Text style={{ color: "#a8a8a8" }}>{categoryItemNumbers}</Text>
     </Flex>
   );
 };
 
-export default CategoryItemWrapper;
+export default CategoryCard;
