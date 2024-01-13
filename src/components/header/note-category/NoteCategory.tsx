@@ -3,9 +3,9 @@ import { ReactSVG } from "react-svg";
 import { TrashIcon } from "@radix-ui/react-icons";
 import { useAtom } from "jotai";
 import { categoryAtom } from "../../../store/note";
-import CategoryItemWrapper from "./category-item/CategoryItem";
 import NewCategory from "./new-category/NewCategory";
 import CustomDialog from "../../shared/dialog/CustomDialog";
+import CategoryCard from "./category-card/CategoryCard";
 
 const NoteCategories = () => {
   const [categoryItem] = useAtom(categoryAtom);
@@ -17,7 +17,6 @@ const NoteCategories = () => {
       <Dialog.Content
         style={{
           backgroundColor: "#111111",
-          // boxShadow: " 1px 1px 4px 1px #ffea8a",
         }}
       >
         <Flex justify={"between"} align={"center"}>
@@ -34,7 +33,7 @@ const NoteCategories = () => {
 
         <Flex direction={"column"} gap={"3"} mt={"5"}>
           {categoryItem.map((item, index) => (
-            <CategoryItemWrapper
+            <CategoryCard
               key={index}
               title={item.title}
               categoryItemNumbers={item.categoryItemNumbers}
@@ -57,7 +56,7 @@ const NoteCategories = () => {
           content={(dismiss) => <NewCategory dismiss={dismiss} />}
           backgroundColor="#0e0e0e"
           boxShadow="1px 1px 4px 1px #f8f7f0"
-          maxWidth="60rem"
+          maxWidth="30rem"
         />
       </Dialog.Content>
     </Dialog.Root>
