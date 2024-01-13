@@ -3,7 +3,7 @@ import { LimitText } from "../note.styled";
 import { NoteProps } from "../../types/note.types";
 import { Pencil1Icon } from "@radix-ui/react-icons";
 import CustomDialog from "../shared/dialog/CustomDialog";
-import NewNoteContent from "../new-note-content/NewNoteContent";
+import NewNoteContent from "../note-content/NoteContent";
 
 const NoteItem = (props: NoteProps) => {
   const { title, bodyText, date } = props;

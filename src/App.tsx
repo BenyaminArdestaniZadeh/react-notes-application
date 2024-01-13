@@ -6,9 +6,9 @@ import Header from "./components/header/Header";
 import { useAtom } from "jotai";
 import { noteAtom } from "./store/note";
 import NoteItem from "./components/note item/NoteItem";
-import NewNoteContent from "./components/new-note-content/NewNoteContent";
 import CustomDialog from "./components/shared/dialog/CustomDialog";
 import { CreateNewNoteButton } from "./components/note.styled";
+import NoteContent from "./components/note-content/NoteContent";
 
 function App() {
   const [noteItem] = useAtom(noteAtom);
@@ -38,7 +38,7 @@ function App() {
             <Text size={"6"}>+</Text>
           </CreateNewNoteButton>
         }
-        content={(dismiss) => <NewNoteContent dismiss={dismiss} />}
+        content={(dismiss) => <NoteContent dismiss={dismiss} />}
         backgroundColor="#282b30"
       />
     </Flex>

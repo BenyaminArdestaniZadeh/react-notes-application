@@ -6,7 +6,7 @@ import { useAtom } from "jotai";
 import { noteAtom } from "../../store/note";
 // import { useState } from "react";
 
-const NewNoteContent = ({ dismiss }: { dismiss: () => void }) => {
+const NoteContent = ({ dismiss }: { dismiss: () => void }) => {
   const [noteItem, setNoteItem] = useAtom(noteAtom);
   // const [open, setOpen] = useState<boolean>(false);
   const {
@@ -27,7 +27,6 @@ const NewNoteContent = ({ dismiss }: { dismiss: () => void }) => {
       setNoteItem([...noteItem, AddItemToNote]);
     }
     dismiss();
-    console.log("form data:", item);
   };
 
   return (
@@ -67,7 +66,6 @@ const NewNoteContent = ({ dismiss }: { dismiss: () => void }) => {
             {errors.bodyText.message}
           </Text>
         )}
-        <Text as="label" color="tomato"></Text>
       </Flex>
       <Flex width={"auto"} gap={"3"} mt={"4"} justify={"end"}>
         <Dialog.Close>
@@ -93,7 +91,7 @@ const NewNoteContent = ({ dismiss }: { dismiss: () => void }) => {
   );
 };
 
-export default NewNoteContent;
+export default NoteContent;
 
 const TextAreaWrapper = styled(TextArea)`
   .rt-TextAreaInput {
