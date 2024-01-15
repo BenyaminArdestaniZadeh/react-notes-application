@@ -3,10 +3,17 @@ import { LimitText } from "../note.styled";
 import { NoteProps } from "../../types/note.types";
 import { Pencil1Icon } from "@radix-ui/react-icons";
 import CustomDialog from "../shared/dialog/CustomDialog";
-import NewNoteContent from "../note-content/NoteContent";
+import NoteContent from "../shared/note-content/NoteContent";
+import { useAtom } from "jotai";
+import { selectedNote } from "../../store/note";
 
 const NoteItem = (props: NoteProps) => {
-  const { title, bodyText, date } = props;
+  const { title, bodyText, date, id } = props;
+  const [selectedItem, setSelectedItem] = useAtom(selectedNote);
+
+  const handleDeleteNote = () => {
+    id && setSelectedItem([...selectedItem, id]);
+  };
 
   return (
     <Flex
@@ -20,16 +27,19 @@ const NoteItem = (props: NoteProps) => {
       }}
     >
       <Flex width={"100%"} justify={"between"} align={"center"}>
-        <Heading size={"7"} style={{ color: "whitesmoke" }}>
-          {title}
-        </Heading>
+        <Flex align={"center"} gap={"5"}>
+          <input type="checkbox" onChange={() => handleDeleteNote()} />
+          <Heading size={"7"} style={{ color: "whitesmoke" }}>
+            {title}
+          </Heading>
+        </Flex>
         <CustomDialog
           triger={
             <Button size={"3"} color="yellow" style={{ cursor: "pointer" }}>
               <Pencil1Icon style={{ width: "25px", height: "25px" }} />
             </Button>
           }
-          content={(dismiss) => <NewNoteContent dismiss={dismiss} />}
+          content={(dismiss) => <NoteContent type="edit" dismiss={dismiss} />}
           backgroundColor="#282b30"
         />
       </Flex>
