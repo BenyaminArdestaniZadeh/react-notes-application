@@ -4,6 +4,7 @@ import { ReactNode, useState } from "react";
 const CustomDialog = ({
   triger,
   content,
+  id,
   backgroundColor,
   boxShadow,
   maxWidth,
@@ -12,6 +13,7 @@ const CustomDialog = ({
 }: {
   triger: ReactNode;
   content: (dismiss: () => void) => ReactNode;
+  id: number;
   backgroundColor?: string;
   boxShadow?: string;
   maxWidth?: "50rem" | string;
@@ -21,7 +23,7 @@ const CustomDialog = ({
   const [open, setOpen] = useState(false);
   const dismiss = () => setOpen(false);
   return (
-    <Dialog.Root open={open} onOpenChange={setOpen}>
+    <Dialog.Root open={open} onOpenChange={setOpen} key={id}>
       <Dialog.Trigger>{triger}</Dialog.Trigger>
       <Dialog.Content
         style={{
