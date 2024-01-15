@@ -1,12 +1,20 @@
 import { Button, Dialog, Flex, Text, TextArea } from "@radix-ui/themes";
 import styled from "styled-components";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { NoteProps } from "../../types/note.types";
+import { NoteProps } from "../../../types/note.types";
 import { useAtom } from "jotai";
-import { noteAtom } from "../../store/note";
+import { noteAtom } from "../../../store/note";
 // import { useState } from "react";
 
-const NoteContent = ({ dismiss }: { dismiss: () => void }) => {
+type NoteContentProps = {
+  dismiss: () => void;
+  type: "create" | "edit";
+  id?: number;
+  category?: string;
+};
+
+const NoteContent = (props: NoteContentProps) => {
+  const { dismiss, type } = props;
   const [noteItem, setNoteItem] = useAtom(noteAtom);
   // const [open, setOpen] = useState<boolean>(false);
   const {
@@ -23,8 +31,17 @@ const NoteContent = ({ dismiss }: { dismiss: () => void }) => {
         title: item.title,
         bodyText: item.bodyText,
         date: currentDate,
+        id: item.id,
       };
-      setNoteItem([...noteItem, AddItemToNote]);
+      if (type === "create") {
+        setNoteItem([...noteItem, AddItemToNote]);
+        // console.log("Create ");
+      } else {
+        const noteFiltering = noteItem.filter(
+          (item, index) => noteItem.indexOf(item) === index
+        );
+        console.log("edite", noteFiltering);
+      }
     }
     dismiss();
   };
