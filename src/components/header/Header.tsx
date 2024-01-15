@@ -5,6 +5,7 @@ import { UseDebounce } from "../use-debounce/UseDebounce";
 import { useAtom } from "jotai";
 import { noteAtom } from "../../store/note";
 import NoteCategories from "./note-category/NoteCategory";
+import DeleteButton from "../delete-button/DeleteButton";
 
 const Header = () => {
   const [searchValue, setSearchValue] = useState<string>("");
@@ -18,7 +19,6 @@ const Header = () => {
         item.bodyText.toLowerCase().includes(e.target.value.toLowerCase())
       );
     });
-
     setNoteItem(result);
   };
 
@@ -36,18 +36,16 @@ const Header = () => {
         />
       </Flex>
 
-      <Flex gap={"5"} align={"center"} py={"3"}>
-        <Button size={"3"} color="yellow" style={{ cursor: "pointer" }}>
-          <Text>All</Text>
-        </Button>
-        <Button
-          size={"3"}
-          color="yellow"
-          style={{ cursor: "pointer" }}
-          onClick={() => console.log("re")}
-        >
-          <NoteCategories />
-        </Button>
+      <Flex width={"100%"} justify={"between"} align={"center"}>
+        <Flex gap={"5"} align={"center"} py={"3"}>
+          <Button size={"3"} color="yellow" style={{ cursor: "pointer" }}>
+            <Text>All</Text>
+          </Button>
+          <Button size={"3"} color="yellow" style={{ cursor: "pointer" }}>
+            <NoteCategories />
+          </Button>
+        </Flex>
+        <DeleteButton />
       </Flex>
     </Flex>
   );
