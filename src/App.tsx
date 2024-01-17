@@ -23,12 +23,13 @@ function App() {
     >
       <Header />
       <Grid columns={"3"} gap={"3"} flow={"row"}>
-        {noteItem?.map((item, index) => (
+        {noteItem?.map((item) => (
           <NoteItem
-            id={index + 1}
+            key={item.id}
             title={item.title}
             bodyText={item.bodyText}
             date={item.date}
+            id={item.id}
           />
         ))}
       </Grid>
