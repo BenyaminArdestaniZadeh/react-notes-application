@@ -24,6 +24,8 @@ const NoteContent = (props: NoteContentProps) => {
   } = useForm<NoteProps>();
 
   const currentDate = new Date().toString().slice(4, 21);
+  // const getId = noteItem.map((item, index) => (item.id = index + 1));
+  // console.log("GET ID=====>", getId);
 
   const onSubmit: SubmitHandler<NoteProps> = (item: NoteProps) => {
     if (item.bodyText.trim() !== "" && item.title?.trim() !== "") {
@@ -31,11 +33,11 @@ const NoteContent = (props: NoteContentProps) => {
         title: item.title,
         bodyText: item.bodyText,
         date: currentDate,
-        id: item.id,
+        id: noteItem.length + 1,
       };
+
       if (type === "create") {
         setNoteItem([...noteItem, AddItemToNote]);
-        // console.log("Create ");
       } else {
         const noteFiltering = noteItem.filter(
           (item, index) => noteItem.indexOf(item) === index
