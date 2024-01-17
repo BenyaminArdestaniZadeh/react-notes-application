@@ -12,7 +12,10 @@ const CategoryCard = (props: CategoryItemProps) => {
       py={"4"}
       style={{ backgroundColor: "#282b30", borderRadius: "4px" }}
     >
-      <Text style={{ color: "whitesmoke" }}>{title}</Text>
+      <Flex align={"center"} gap={"5"}>
+        <input type="checkbox" />
+        <Text style={{ color: "whitesmoke" }}>{title}</Text>
+      </Flex>
       <Text style={{ color: "#a8a8a8" }}>{categoryItemNumbers}</Text>
     </Flex>
   );
