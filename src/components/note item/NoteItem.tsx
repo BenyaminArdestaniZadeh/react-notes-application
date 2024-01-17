@@ -5,14 +5,21 @@ import { Pencil1Icon } from "@radix-ui/react-icons";
 import CustomDialog from "../shared/dialog/CustomDialog";
 import NoteContent from "../shared/note-content/NoteContent";
 import { useAtom } from "jotai";
-import { selectedNote } from "../../store/note";
+import { selectedNoteIdAtom } from "../../store/note";
 
 const NoteItem = (props: NoteProps) => {
   const { title, bodyText, date, id } = props;
-  const [selectedItem, setSelectedItem] = useAtom(selectedNote);
+  const [selectedItem, setSelectedItem] = useAtom(selectedNoteIdAtom);
+  console.log("false==>", selectedItem);
 
   const handleDeleteNote = () => {
-    id && setSelectedItem([...selectedItem, id]);
+    // in this condition , the selected Item will be checked to return its ID so that we can delete it by delete button
+    if (!selectedItem.includes(id)) {
+      setSelectedItem([...selectedItem, id]);
+    } else {
+      const removeItemFromArray = selectedItem.filter((item) => item !== id);
+      setSelectedItem(removeItemFromArray);
+    }
   };
 
   return (
@@ -27,9 +34,9 @@ const NoteItem = (props: NoteProps) => {
       }}
     >
       <Flex width={"100%"} justify={"between"} align={"center"}>
-        <Flex align={"center"} gap={"5"}>
+        <Flex align={"center"} gap={"3"} style={{ width: "75%" }}>
           <input type="checkbox" onChange={() => handleDeleteNote()} />
-          <Heading size={"7"} style={{ color: "whitesmoke" }}>
+          <Heading size={"5"} style={{ color: "whitesmoke" }}>
             {title}
           </Heading>
         </Flex>
