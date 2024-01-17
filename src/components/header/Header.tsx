@@ -5,7 +5,7 @@ import { UseDebounce } from "../use-debounce/UseDebounce";
 import { useAtom } from "jotai";
 import { noteAtom } from "../../store/note";
 import NoteCategories from "./note-category/NoteCategory";
-import DeleteButton from "../delete-button/DeleteButton";
+import DeleteButton from "../shared/delete-button/DeleteButton";
 
 const Header = () => {
   const [searchValue, setSearchValue] = useState<string>("");
