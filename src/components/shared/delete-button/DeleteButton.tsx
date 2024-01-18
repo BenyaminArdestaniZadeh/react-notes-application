@@ -12,7 +12,7 @@ const DeleteButton = () => {
       const deleteItem = noteItem.filter(
         (item) => !selectedItem.includes(item.id)
       );
-      console.log("delete goh", deleteItem);
+
       setNoteItem(deleteItem);
       setSelectedItem([]);
     } else {
