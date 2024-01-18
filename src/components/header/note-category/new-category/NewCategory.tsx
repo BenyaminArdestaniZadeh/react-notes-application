@@ -2,10 +2,10 @@ import { Button, Dialog, Flex, Text } from "@radix-ui/themes";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { CategoryItemProps } from "../../../../types/note.types";
 import { useAtom } from "jotai";
-import { categoryAtom } from "../../../../store/note";
+import { categoryItemAtom } from "../../../../store/note";
 
 const NewCategory = ({ dismiss }: { dismiss: () => void }) => {
-  const [cardItems, setCardItem] = useAtom(categoryAtom);
+  const [categoryCardItems, setCategoryCardItem] = useAtom(categoryItemAtom);
   const {
     register,
     handleSubmit,
@@ -16,9 +16,10 @@ const NewCategory = ({ dismiss }: { dismiss: () => void }) => {
     if (item.title.trim() !== "") {
       const newCategoryCard = {
         title: item.title,
-        number: cardItems.length,
+        number: categoryCardItems.length + 1,
+        id: categoryCardItems.length + 1,
       };
-      setCardItem([...cardItems, newCategoryCard]);
+      setCategoryCardItem([...categoryCardItems, newCategoryCard]);
     }
     dismiss();
   };
@@ -42,21 +43,11 @@ const NewCategory = ({ dismiss }: { dismiss: () => void }) => {
         )}
         <Flex justify={"end"} gap={"2"} mt={"9"}>
           <Dialog.Close>
-            <Button
-              type="button"
-              size={"3"}
-              color="gray"
-              style={{ cursor: "pointer" }}
-            >
+            <Button type="button" size={"3"} color="gray">
               <Text>Cancle</Text>
             </Button>
           </Dialog.Close>
-          <Button
-            type="submit"
-            size={"3"}
-            color="yellow"
-            style={{ cursor: "pointer" }}
-          >
+          <Button type="submit" size={"3"} color="yellow">
             <Text>Save</Text>
           </Button>
         </Flex>
