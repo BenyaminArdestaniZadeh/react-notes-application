@@ -23,7 +23,7 @@ const DeleteButton = () => {
   return (
     <Button
       color="yellow"
-      style={{ width: "50px", height: "40px", cursor: "pointer" }}
+      style={{ width: "50px", height: "40px" }}
       onClick={() => handleDeleteNote()}
       //   type="submit"
     >

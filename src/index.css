@@ -16,6 +16,15 @@ body {
   background-color: #575757 !important;
 }
 
+button {
+  transition: all linear 150ms;
+  cursor: pointer !important;
+}
+
+button:hover {
+  transform: scale(1.11);
+}
+
 .search-wrapper {
   width: 25rem;
   margin-top: 2rem;
@@ -57,4 +66,14 @@ input[type="checkbox"] {
   width: 20px;
   height: 20px;
   accent-color: yellow;
+}
+.selected-category {
+  transition: all linear 200ms;
+}
+
+.selected-category:hover {
+  cursor: pointer;
+  background-color: red;
+  color: #ffffff;
+  transform: scale(1.2);
 }

@@ -3,7 +3,7 @@ import { LimitText } from "../note.styled";
 import { NoteProps } from "../../types/note.types";
 import { Pencil1Icon } from "@radix-ui/react-icons";
 import CustomDialog from "../shared/dialog/CustomDialog";
-import NoteContent from "../shared/note-content/NoteContent";
+import UseNoteContent from "../shared/note-content/UseNoteContent";
 import { useAtom } from "jotai";
 import { selectedNoteIdAtom } from "../../store/note";
 
@@ -42,11 +42,13 @@ const NoteItem = (props: NoteProps) => {
         </Flex>
         <CustomDialog
           triger={
-            <Button size={"3"} color="yellow" style={{ cursor: "pointer" }}>
+            <Button size={"3"} color="yellow">
               <Pencil1Icon style={{ width: "25px", height: "25px" }} />
             </Button>
           }
-          content={(dismiss) => <NoteContent type="edit" dismiss={dismiss} />}
+          content={(dismiss) => (
+            <UseNoteContent type="edit" dismiss={dismiss} />
+          )}
           backgroundColor="#282b30"
         />
       </Flex>
