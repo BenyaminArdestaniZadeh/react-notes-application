@@ -1,65 +1,75 @@
+//wrapper for categories , show this section as a dialog for show , create and delete categories
 import { Box, Button, Dialog, Flex } from "@radix-ui/themes";
-import { ReactSVG } from "react-svg";
 import { TrashIcon } from "@radix-ui/react-icons";
 import { useAtom } from "jotai";
-import { categoryAtom } from "../../../store/note";
+import { categoryItemAtom, selectedNoteIdAtom } from "../../../store/note";
 import NewCategory from "./new-category/NewCategory";
 import CustomDialog from "../../shared/dialog/CustomDialog";
 import CategoryCard from "./category-card/CategoryCard";
 
-const NoteCategories = () => {
-  const [categoryItem] = useAtom(categoryAtom);
-  return (
-    <Dialog.Root>
-      <Dialog.Trigger>
-        <ReactSVG src="./svg/FolderIcon.svg" />
-      </Dialog.Trigger>
-      <Dialog.Content
-        style={{
-          backgroundColor: "#111111",
-        }}
-      >
-        <Flex justify={"between"} align={"center"}>
-          <Dialog.Title style={{ color: "whitesmoke" }}>
-            Categories
-          </Dialog.Title>
-          <Button
-            color="yellow"
-            style={{ width: "50px", height: "40px", cursor: "pointer" }}
-          >
-            <TrashIcon style={{ width: "25px", height: "25px" }} />
-          </Button>
-        </Flex>
+type NoteCategoriesProps = {
+  dismiss: () => void;
+};
 
-        <Flex direction={"column"} gap={"3"} mt={"5"}>
-          {categoryItem.map((item, index) => (
-            <CategoryCard
-              key={index}
-              title={item.title}
-              categoryItemNumbers={item.categoryItemNumbers}
-            />
-          ))}
-        </Flex>
-        <CustomDialog
-          triger={
-            <Box width={"100%"} mt={"4"}>
-              <Button
-                size={"4"}
-                color="yellow"
-                variant="outline"
-                style={{ width: "100%", cursor: "pointer" }}
-              >
-                Create New Category
-              </Button>
-            </Box>
-          }
-          content={(dismiss) => <NewCategory dismiss={dismiss} />}
-          backgroundColor="#0e0e0e"
-          boxShadow="1px 1px 4px 1px #f8f7f0"
-          maxWidth="30rem"
-        />
-      </Dialog.Content>
-    </Dialog.Root>
+const NoteCategories = (props: NoteCategoriesProps) => {
+  const { dismiss } = props;
+  const [categoryItem, setCategoryItem] = useAtom(categoryItemAtom);
+  const [selectedCategoryId, setSelectedCategoryId] =
+    useAtom(selectedNoteIdAtom);
+
+  const handleCategorySelectedId = () => {
+    if (selectedCategoryId.length !== 0) {
+      const deleteCategory = categoryItem.filter(
+        (item) => !selectedCategoryId.includes(item.id)
+      );
+      setCategoryItem(deleteCategory);
+      console.log(deleteCategory);
+      setSelectedCategoryId([]);
+    }
+    dismiss();
+  };
+  return (
+    <Flex direction={"column"}>
+      <Flex justify={"between"} align={"center"}>
+        <Dialog.Title style={{ color: "whitesmoke" }}>Categories</Dialog.Title>
+        <Button
+          color="yellow"
+          style={{ width: "50px", height: "40px" }}
+          onClick={() => handleCategorySelectedId()}
+        >
+          <TrashIcon style={{ width: "25px", height: "25px" }} />
+        </Button>
+      </Flex>
+
+      <Flex direction={"column"} gap={"3"} mt={"5"}>
+        {categoryItem.map((item) => (
+          <CategoryCard
+            key={item.id}
+            title={item.title}
+            categoryItemNumbers={item.categoryItemNumbers}
+            id={item.id}
+          />
+        ))}
+      </Flex>
+      <CustomDialog
+        triger={
+          <Box width={"100%"} mt={"4"} style={{ textAlign: "center" }}>
+            <Button
+              size={"4"}
+              color="yellow"
+              variant="outline"
+              style={{ width: "90%" }}
+            >
+              Create New Category
+            </Button>
+          </Box>
+        }
+        content={(dismiss) => <NewCategory dismiss={dismiss} />}
+        backgroundColor="#0e0e0e"
+        boxShadow="1px 1px 4px 1px #f8f7f0"
+        maxWidth="30rem"
+      />
+    </Flex>
   );
 };
 
