@@ -22,7 +22,6 @@ export const CreateNewNoteButton = styled(Button)`
   position: fixed;
   right: 5%;
   bottom: 5%;
-  cursor: pointer;
 `;
 
 export const LimitText = styled(Text)<{ lineNumber?: number }>`
