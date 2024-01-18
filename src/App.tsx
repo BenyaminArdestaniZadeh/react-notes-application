@@ -8,7 +8,7 @@ import { noteAtom } from "./store/note";
 import NoteItem from "./components/note item/NoteItem";
 import CustomDialog from "./components/shared/dialog/CustomDialog";
 import { CreateNewNoteButton } from "./components/note.styled";
-import NoteContent from "./components/shared/note-content/NoteContent";
+import NoteContent from "./components/shared/note-content/UseNoteContent";
 
 function App() {
   const [noteItem] = useAtom(noteAtom);
