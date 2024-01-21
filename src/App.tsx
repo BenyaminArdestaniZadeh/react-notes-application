@@ -8,7 +8,7 @@ import { noteAtom } from "./store/note";
 import NoteItem from "./components/note item/NoteItem";
 import CustomDialog from "./components/shared/dialog/CustomDialog";
 import { CreateNewNoteButton } from "./components/note.styled";
-import NoteContent from "./components/shared/note-content/UseNoteContent";
+import UseNoteContent from "./components/shared/note-content/UseNoteContent";
 
 function App() {
   const [noteItem] = useAtom(noteAtom);
@@ -20,9 +20,10 @@ function App() {
       p={"6"}
       gap={"4"}
       position={"relative"}
+      style={{ minHeight: "100vh" }}
     >
       <Header />
-      <Grid columns={"3"} gap={"3"} flow={"row"}>
+      <Grid width={"100%"} columns={"3"} gap={"5"} flow={"row"}>
         {noteItem?.map((item) => (
           <NoteItem
             key={item.id}
@@ -39,7 +40,9 @@ function App() {
             <Text size={"6"}>+</Text>
           </CreateNewNoteButton>
         }
-        content={(dismiss) => <NoteContent type="create" dismiss={dismiss} />}
+        content={(dismiss) => (
+          <UseNoteContent type="create" dismiss={dismiss} />
+        )}
         backgroundColor="#282b30"
       />
     </Flex>
