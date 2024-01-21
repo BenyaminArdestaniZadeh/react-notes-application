@@ -20,7 +20,7 @@ export const CreateNewNoteButton = styled(Button)`
   padding: 30px !important;
   border-radius: 50px !important;
   position: fixed;
-  right: 5%;
+  right: 2.4%;
   bottom: 5%;
 `;
 
