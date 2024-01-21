@@ -8,7 +8,6 @@
 }
 
 body {
-  max-width: 1200px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -75,5 +74,28 @@ input[type="checkbox"] {
   cursor: pointer;
   background-color: red;
   color: #ffffff;
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
+
+.dropdown-item-style {
+  color: rgb(177, 177, 177);
+  transition: all linear 150ms;
+}
+
+.dropdown-item-style:hover {
+  color: black;
+  background-color: #ffe629;
+}
+
+.dots-icon-button {
+  color: red !important;
+}
+
+/* .dots-icon-style-wrapper {
+  background-color: transparent;
+}
+
+.dots-icon-style {
+  width: 2rem;
+  height: 2rem;
+} */
