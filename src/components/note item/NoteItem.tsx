@@ -1,18 +1,19 @@
-import { Button, Flex, Heading, Text } from "@radix-ui/themes";
+import { Flex, Heading, Text } from "@radix-ui/themes";
 import { LimitText } from "../note.styled";
 import { NoteProps } from "../../types/note.types";
-import { Pencil1Icon } from "@radix-ui/react-icons";
-import CustomDialog from "../shared/dialog/CustomDialog";
-import UseNoteContent from "../shared/note-content/UseNoteContent";
+// import CustomDialog from "../shared/dialog/CustomDialog";
+// import UseNoteContent from "../shared/note-content/UseNoteContent";
 import { useAtom } from "jotai";
 import { selectedNoteIdAtom } from "../../store/note";
+import MoreOption from "../more-option-button/MoreOption";
 
 const NoteItem = (props: NoteProps) => {
   const { title, bodyText, date, id } = props;
   const [selectedItem, setSelectedItem] = useAtom(selectedNoteIdAtom);
+
   console.log("false==>", selectedItem);
 
-  const handleDeleteNote = () => {
+  const handleDeleteNoteByCheckbox = () => {
     // in this condition , the selected Item will be checked to return its ID so that we can delete it by delete button
     if (!selectedItem.includes(id)) {
       setSelectedItem([...selectedItem, id]);
@@ -25,7 +26,7 @@ const NoteItem = (props: NoteProps) => {
   return (
     <Flex
       direction={"column"}
-      gap={"2"}
+      gap={"4"}
       p={"4"}
       style={{
         backgroundColor: "#282b30",
@@ -35,22 +36,15 @@ const NoteItem = (props: NoteProps) => {
     >
       <Flex width={"100%"} justify={"between"} align={"center"}>
         <Flex align={"center"} gap={"3"} style={{ width: "75%" }}>
-          <input type="checkbox" onChange={() => handleDeleteNote()} />
+          <input
+            type="checkbox"
+            onChange={() => handleDeleteNoteByCheckbox()}
+          />
           <Heading size={"5"} style={{ color: "whitesmoke" }}>
             {title}
           </Heading>
         </Flex>
-        <CustomDialog
-          triger={
-            <Button size={"3"} color="yellow">
-              <Pencil1Icon style={{ width: "25px", height: "25px" }} />
-            </Button>
-          }
-          content={(dismiss) => (
-            <UseNoteContent type="edit" dismiss={dismiss} />
-          )}
-          backgroundColor="#282b30"
-        />
+        <MoreOption id={id} />
       </Flex>
 
       <LimitText size={"4"} style={{ color: "#d3d3d3" }} lineNumber={3}>
