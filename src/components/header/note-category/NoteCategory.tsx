@@ -1,5 +1,5 @@
 //wrapper for categories , show this section as a dialog for show , create and delete categories
-import { Box, Button, Dialog, Flex } from "@radix-ui/themes";
+import { Box, Button, Dialog, Flex, ScrollArea } from "@radix-ui/themes";
 import { TrashIcon } from "@radix-ui/react-icons";
 import { useAtom } from "jotai";
 import { categoryItemAtom, selectedNoteIdAtom } from "../../../store/note";
@@ -41,16 +41,24 @@ const NoteCategories = (props: NoteCategoriesProps) => {
         </Button>
       </Flex>
 
-      <Flex direction={"column"} gap={"3"} mt={"5"}>
-        {categoryItem.map((item) => (
-          <CategoryCard
-            key={item.id}
-            title={item.title}
-            categoryItemNumbers={item.categoryItemNumbers}
-            id={item.id}
-          />
-        ))}
-      </Flex>
+      <ScrollArea
+        type="always"
+        scrollbars="vertical"
+        size={"2"}
+        style={{ maxHeight: "350px" }}
+      >
+        <Flex direction={"column"} gap={"3"} mt={"5"} style={{ width: "95%" }}>
+          {categoryItem.map((item) => (
+            <CategoryCard
+              key={item.id}
+              title={item.title}
+              categoryItemNumbers={item.categoryItemNumbers}
+              id={item.id}
+            />
+          ))}
+        </Flex>
+      </ScrollArea>
+
       <CustomDialog
         triger={
           <Box width={"100%"} mt={"4"} style={{ textAlign: "center" }}>
