@@ -1,12 +1,15 @@
 import { Button, Flex, Text } from "@radix-ui/themes";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
-
+// import { useState } from "react";
+// import { UseDebounce } from "../use-debounce/UseDebounce";
 import { useAtom } from "jotai";
 import { categoryItemAtom, noteAtom } from "../../store/note";
 import NoteCategories from "./note-category/NoteCategory";
 import DeleteButton from "../shared/delete-button/DeleteButton";
 import CustomDialog from "../shared/dialog/CustomDialog";
 import { ReactSVG } from "react-svg";
+import styled from "styled-components";
+import { CategoryItemProps } from "../../types/note.types";
 
 const Header = () => {
   // const [searchValue, setSearchValue] = useState<string>("");
@@ -44,14 +47,11 @@ const Header = () => {
             <Text>All</Text>
           </Button>
           {/* categories */}
-          <Flex
+          <HeaderCategoryWrapper
             py={"2"}
-            px={"3"}
+            px={"4"}
             gap={"3"}
-            style={{
-              width: "88%",
-              borderRadius: "8px",
-            }}
+            categoryCardItems={categoryCardItems}
           >
             {categoryCardItems &&
               categoryCardItems.map((item) => (
@@ -66,7 +66,7 @@ const Header = () => {
                   <Text weight={"bold"}>{item.title}</Text>
                 </Button>
               ))}
-          </Flex>
+          </HeaderCategoryWrapper>
         </Flex>
         <Flex gap={"5"} align={"center"} py={"3"}>
           <CustomDialog
@@ -89,3 +89,14 @@ const Header = () => {
 };
 
 export default Header;
+
+const HeaderCategoryWrapper = styled(Flex)<{
+  categoryCardItems: CategoryItemProps[];
+}>`
+  max-width: 50rem;
+  border-radius: 8px;
+  border: ${(props) =>
+    props.categoryCardItems.length > 0 ? "1px solid yellow" : "none"};
+  scroll-snap-type: x mandatory;
+  overflow-x: scroll;
+`;
