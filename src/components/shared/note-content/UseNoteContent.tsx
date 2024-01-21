@@ -4,7 +4,6 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { NoteProps } from "../../../types/note.types";
 import { useAtom } from "jotai";
 import { noteAtom } from "../../../store/note";
-// import { useState } from "react";
 
 type NoteContentProps = {
   dismiss: () => void;
@@ -14,9 +13,8 @@ type NoteContentProps = {
 };
 
 const UseNoteContent = (props: NoteContentProps) => {
-  const { dismiss, type } = props;
+  const { dismiss, type, id } = props;
   const [noteItem, setNoteItem] = useAtom(noteAtom);
-  // const [open, setOpen] = useState<boolean>(false);
   const {
     register,
     handleSubmit,
@@ -24,8 +22,6 @@ const UseNoteContent = (props: NoteContentProps) => {
   } = useForm<NoteProps>();
 
   const currentDate = new Date().toString().slice(4, 21);
-  // const getId = noteItem.map((item, index) => (item.id = index + 1));
-  // console.log("GET ID=====>", getId);
 
   const onSubmit: SubmitHandler<NoteProps> = (item: NoteProps) => {
     if (item.bodyText.trim() !== "" && item.title?.trim() !== "") {
@@ -40,7 +36,7 @@ const UseNoteContent = (props: NoteContentProps) => {
         setNoteItem([...noteItem, AddItemToNote]);
       } else {
         const noteFiltering = noteItem.filter(
-          (item, index) => noteItem.indexOf(item) === index
+          (item) => noteItem.indexOf(item) === id
         );
         console.log("edite", noteFiltering);
       }
@@ -113,12 +109,3 @@ const TextAreaWrapper = styled(TextArea)`
     color: #ffffff;
   }
 `;
-
-// const getCurrentDate = () => {
-//     let currentDate = new Date().toString().slice(0, 21);
-//     let day = currentDate.slice(0, 3);
-//     let date = currentDate.slice(4, 15);
-//     let time = currentDate.slice(16, 22);
-//     const reFormatCurrentDate = `${day}-${date}-${time}`;
-//     return reFormatCurrentDate;
-//   };
